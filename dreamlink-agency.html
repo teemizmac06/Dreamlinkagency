@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DreamLink Agency – Twitch Promotion</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #ff2244;
+    --red-dark: #cc0022;
+    --red-glow: rgba(255,34,68,0.4);
+    --purple: #9146ff;
+    --bg: #0a0a0f;
+    --bg2: #0f0f18;
+    --bg3: #14141f;
+    --text: #f0f0f8;
+    --text-dim: #888899;
+    --twitch: #9146ff;
+    --gold: #ffd700;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,34,68,0.15);
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--red);
+    letter-spacing: 3px;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--text); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta {
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background .2s, box-shadow .2s;
+  }
+  .nav-cta:hover { background: var(--red-dark); box-shadow: 0 0 20px var(--red-glow); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    position: relative;
+    padding: 120px 20px 60px;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,34,68,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,34,68,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%);
+  }
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,34,68,0.15) 0%, transparent 70%);
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,34,68,0.1);
+    border: 1px solid rgba(255,34,68,0.3);
+    color: var(--red);
+    padding: 6px 16px;
+    font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 32px;
+    position: relative;
+    animation: fadeUp .8s ease both;
+  }
+  .badge-dot {
+    width: 8px; height: 8px; background: var(--red); border-radius: 50%;
+    animation: blink 1.2s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(20px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 10vw, 140px);
+    line-height: .95;
+    letter-spacing: 2px;
+    position: relative;
+    animation: fadeUp 1s ease .2s both;
+  }
+  .hero h1 .accent { color: var(--red); }
+  .hero-sub {
+    max-width: 580px;
+    color: var(--text-dim);
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 24px auto 40px;
+    animation: fadeUp 1s ease .4s both;
+  }
+  .hero-ctas {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 1s ease .6s both;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 16px 36px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .2s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-primary:hover { background: #ff0022; box-shadow: 0 0 30px var(--red-glow); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 16px 36px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--bg3);
+    border-top: 1px solid rgba(255,34,68,0.2);
+    border-bottom: 1px solid rgba(255,34,68,0.2);
+    padding: 32px 60px;
+    display: flex; justify-content: center; gap: 80px; flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 38px; font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+  }
+  .stat-label { font-size: 12px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-top: 6px; }
+
+  /* SECTION BASE */
+  section { padding: 100px 60px; max-width: 1280px; margin: 0 auto; }
+  .section-tag {
+    font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .section-desc { color: var(--text-dim); font-size: 16px; line-height: 1.8; max-width: 600px; }
+
+  /* RECRUITING BANNER */
+  .recruit-banner {
+    background: var(--bg3);
+    border: 1px solid rgba(255,34,68,0.2);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    margin: 0 0 0 0;
+  }
+  .recruit-inner {
+    display: flex; align-items: center; gap: 24px;
+    padding: 20px 60px;
+  }
+  .recruit-light {
+    flex-shrink: 0;
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 8px var(--red), 0 0 20px var(--red), 0 0 40px var(--red-glow);
+    animation: glow-move 2s ease-in-out infinite;
+    position: relative;
+  }
+  @keyframes glow-move {
+    0%, 100% { box-shadow: 0 0 6px var(--red), 0 0 16px var(--red), 0 0 30px var(--red-glow); transform: scale(1); }
+    50% { box-shadow: 0 0 12px var(--red), 0 0 30px var(--red), 0 0 60px var(--red-glow), 0 0 80px rgba(255,34,68,0.2); transform: scale(1.2); }
+  }
+  .recruit-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--text);
+  }
+  .recruit-text span { color: var(--red); }
+  .recruit-scroll {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+  }
+  .recruit-scroll-inner {
+    display: flex; gap: 60px;
+    animation: marquee 18s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .recruit-scroll-inner span {
+    font-size: 12px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .recruit-scroll-inner span b { color: var(--red); }
+
+  /* HOW IT WORKS */
+  .works-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2px;
+    margin-top: 60px;
+  }
+  .works-card {
+    background: var(--bg2);
+    padding: 40px 32px;
+    border: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    transition: border-color .3s;
+  }
+  .works-card:hover { border-color: rgba(255,34,68,0.4); }
+  .works-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 48px; font-weight: 900;
+    color: rgba(255,34,68,0.12);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .works-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+  .works-card p { color: var(--text-dim); font-size: 14px; line-height: 1.7; }
+
+  /* EARNINGS / RESULTS */
+  .results-section {
+    background: var(--bg2);
+    border-top: 1px solid rgba(255,34,68,0.1);
+    border-bottom: 1px solid rgba(255,34,68,0.1);
+    padding: 100px 60px;
+  }
+  .results-inner { max-width: 1280px; margin: 0 auto; }
+  .results-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
+    margin-top: 60px;
+  }
+  .result-card {
+    background: var(--bg3);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 28px;
+    position: relative; overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .result-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
+  .result-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--red), var(--purple));
+  }
+  .result-icon { font-size: 32px; margin-bottom: 16px; }
+  .result-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 32px; font-weight: 900; color: var(--red); margin-bottom: 6px;
+  }
+  .result-label { color: var(--text-dim); font-size: 13px; letter-spacing: 1px; }
+
+  /* STREAMERS */
+  .streamers-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;
+    margin-top: 60px;
+  }
+  .streamer-card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 20px;
+    text-align: center;
+    transition: all .3s;
+    text-decoration: none; color: var(--text);
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  .streamer-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--red), var(--purple));
+    transform: scaleX(0); transition: transform .3s;
+  }
+  .streamer-card:hover { transform: translateY(-4px); border-color: rgba(255,34,68,0.3); }
+  .streamer-card:hover::before { transform: scaleX(1); }
+  .streamer-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), var(--purple));
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px; color: white;
+  }
+  .streamer-name { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+  .streamer-badge {
+    display: inline-block;
+    background: rgba(145,70,255,0.15); border: 1px solid rgba(145,70,255,0.3);
+    color: var(--purple); font-size: 10px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 10px;
+    margin-bottom: 12px;
+  }
+  .streamer-link {
+    font-size: 11px; color: var(--red); letter-spacing: 1px; text-transform: uppercase;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+  }
+
+  /* PACKAGES */
+  .packages-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;
+    margin-top: 60px;
+  }
+  .pkg-card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 40px 36px;
+    position: relative;
+    transition: all .3s;
+  }
+  .pkg-card:hover { border-color: rgba(255,34,68,0.4); transform: translateY(-4px); }
+  .pkg-card.featured {
+    border-color: var(--red);
+    background: linear-gradient(145deg, rgba(255,34,68,0.08), var(--bg2));
+  }
+  .pkg-featured-tag {
+    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    background: var(--red); color: #fff;
+    font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 4px 16px;
+  }
+  .pkg-price {
+    font-family: 'Orbitron', monospace;
+    font-size: 52px; font-weight: 900;
+    color: var(--red); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pkg-price sup { font-size: 24px; vertical-align: top; margin-top: 8px; }
+  .pkg-tier { font-size: 12px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; }
+  .pkg-features { list-style: none; margin-bottom: 36px; }
+  .pkg-features li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px; color: var(--text-dim);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pkg-features li::before { content: '→'; color: var(--red); font-weight: 700; }
+  .pkg-cta {
+    display: block;
+    text-align: center;
+    background: transparent;
+    border: 1px solid var(--red);
+    color: var(--red);
+    padding: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;
+    text-decoration: none;
+    transition: all .2s;
+  }
+  .pkg-cta:hover, .pkg-card.featured .pkg-cta {
+    background: var(--red); color: #fff;
+  }
+  .pkg-card.featured .pkg-cta:hover { background: var(--red-dark); }
+
+  /* REVIEWS */
+  .reviews-section { background: var(--bg); }
+  .reviews-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; flex-wrap: wrap; gap: 20px; }
+  .reviews-score { text-align: right; }
+  .score-big {
+    font-family: 'Orbitron', monospace;
+    font-size: 72px; font-weight: 900; color: var(--gold); line-height: 1;
+  }
+  .score-stars { font-size: 28px; letter-spacing: 4px; margin-bottom: 4px; }
+  .score-count { font-size: 13px; color: var(--text-dim); letter-spacing: 1px; }
+  .reviews-grid {
+    columns: 3; column-gap: 20px;
+  }
+  @media(max-width: 900px) { .reviews-grid { columns: 2; } }
+  @media(max-width: 600px) { .reviews-grid { columns: 1; } }
+  .review-card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 24px;
+    margin-bottom: 20px;
+    break-inside: avoid;
+    transition: border-color .3s;
+  }
+  .review-card:hover { border-color: rgba(255,34,68,0.3); }
+  .review-stars { color: var(--gold); font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; }
+  .review-text { font-size: 14px; color: var(--text-dim); line-height: 1.7; margin-bottom: 16px; }
+  .review-author { font-size: 12px; font-weight: 700; color: var(--text); letter-spacing: 1px; }
+  .review-num { font-size: 11px; color: rgba(255,34,68,0.5); margin-bottom: 4px; }
+
+  /* SPONSORSHIP */
+  .sponsor-section {
+    background: var(--bg2);
+    border-top: 1px solid rgba(255,34,68,0.1);
+    border-bottom: 1px solid rgba(255,34,68,0.1);
+    padding: 100px 60px;
+  }
+  .sponsor-inner { max-width: 1280px; margin: 0 auto; }
+  .sponsor-perks {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
+    margin-top: 60px;
+  }
+  .perk-card {
+    background: var(--bg3);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 32px 28px;
+    transition: all .3s;
+  }
+  .perk-card:hover { border-color: rgba(145,70,255,0.4); }
+  .perk-icon { font-size: 36px; margin-bottom: 16px; }
+  .perk-title { font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+  .perk-desc { color: var(--text-dim); font-size: 13px; line-height: 1.7; }
+
+  /* DONATION */
+  .donation-section { text-align: center; padding: 100px 60px; }
+  .donation-inner { max-width: 600px; margin: 0 auto; }
+  .donation-card {
+    background: var(--bg2);
+    border: 1px solid rgba(255,34,68,0.2);
+    padding: 60px 40px;
+    position: relative; overflow: hidden;
+    margin-top: 40px;
+  }
+  .donation-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top, rgba(255,34,68,0.07), transparent 60%);
+  }
+  .donation-card p { color: var(--text-dim); font-size: 15px; line-height: 1.8; margin-bottom: 32px; position: relative; }
+  .donation-card .btn-primary { position: relative; }
+
+  /* FOOTER */
+  footer {
+    background: var(--bg3);
+    border-top: 1px solid rgba(255,34,68,0.15);
+    padding: 60px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; color: var(--red); letter-spacing: 3px;
+  }
+  .footer-logo span { color: var(--text); }
+  .footer-text { font-size: 13px; color: var(--text-dim); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: var(--text-dim); text-decoration: none; font-size: 13px; transition: color .2s; }
+  .footer-links a:hover { color: var(--red); }
+
+  /* RESPONSIVE */
+  @media(max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 80px 24px; }
+    .stats-bar { padding: 32px 24px; gap: 40px; }
+    .results-section, .sponsor-section { padding: 80px 24px; }
+    footer { padding: 40px 24px; flex-direction: column; text-align: center; }
+    .recruit-inner { padding: 16px 24px; }
+    .reviews-header { flex-direction: column; }
+    .reviews-score { text-align: left; }
+  }
+
+  /* ANIMATIONS */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Dream<span>Link</span></a>
+  <ul class="nav-links">
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#streamers">Partners</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#sponsorship">Sponsorship</a></li>
+  </ul>
+  <a href="https://www.upwork.com/services/product/marketing-organic-twitch-viewers-and-chatter-1876721301038490088?ref=project_share&tier=0" target="_blank" class="nav-cta">Get Started</a>
+</nav>
+
+<!-- RECRUITING BANNER -->
+<div class="recruit-banner">
+  <div class="recruit-inner">
+    <div class="recruit-light"></div>
+    <div class="recruit-text">🔴 <span>LIVE:</span> Recruiting More Streamers</div>
+    <div class="recruit-scroll">
+      <div class="recruit-scroll-inner">
+        <span>We are actively <b>recruiting streamers</b> — join our growing network →</span>
+        <span>Limited spots available — <b>apply now</b> and get promoted →</span>
+        <span>53+ streamers already growing with DreamLink →</span>
+        <span>Real viewers. Real growth. <b>Real results.</b> →</span>
+        <span>We are actively <b>recruiting streamers</b> — join our growing network →</span>
+        <span>Limited spots available — <b>apply now</b> and get promoted →</span>
+        <span>53+ streamers already growing with DreamLink →</span>
+        <span>Real viewers. Real growth. <b>Real results.</b> →</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-badge">
+    <span class="badge-dot"></span>
+    Twitch Promotion Agency
+  </div>
+  <h1>DREAM<br><span class="accent">LINK</span><br>AGENCY</h1>
+  <p class="hero-sub">Real viewers. Real growth. We promote your Twitch channel to targeted, niche audiences — no bots, no fake numbers. Just genuine engagement that builds lasting communities.</p>
+  <div class="hero-ctas">
+    <a href="https://www.upwork.com/services/product/marketing-organic-twitch-viewers-and-chatter-1876721301038490088?ref=project_share&tier=0" target="_blank" class="btn-primary">Start Your Campaign</a>
+    <a href="#how-it-works" class="btn-ghost">See How It Works</a>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item fade-in">
+    <div class="stat-num">53+</div>
+    <div class="stat-label">Streamers Worked With</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Partnered Streamers</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">30+</div>
+    <div class="stat-label">5-Star Reviews</div>
+  </div>
+  <div class="stat-item fade-in">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Real Organic Traffic</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-tag">The Process</div>
+  <h2 class="section-title">HOW OUR<br>PROMOTION WORKS</h2>
+  <p class="section-desc">We don't send fake views. We build real visibility by placing your stream in front of audiences already interested in your content.</p>
+  <div class="works-grid fade-in">
+    <div class="works-card">
+      <div class="works-num">01</div>
+      <h3>Niche Audience Targeting</h3>
+      <p>We identify and target real Twitch viewers who are already interested in your specific game or content type — ensuring genuine engagement, not empty numbers.</p>
+    </div>
+    <div class="works-card">
+      <div class="works-num">02</div>
+      <h3>External Traffic Sources</h3>
+      <p>Your stream gets pushed through external platforms and communities where your target audience actively spends time, driving real people to your channel.</p>
+    </div>
+    <div class="works-card">
+      <div class="works-num">03</div>
+      <h3>Visibility & Consistency</h3>
+      <p>Rather than one-time spikes, we build consistent exposure over time — helping you climb Twitch's algorithm and get discovered by more organic viewers.</p>
+    </div>
+    <div class="works-card">
+      <div class="works-num">04</div>
+      <h3>Real Chat & Retention</h3>
+      <p>The viewers we bring aren't just passive — they chat, follow, and come back. That's how we've helped streamers grow loyal communities from scratch.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<div class="results-section">
+  <div class="results-inner">
+    <div class="section-tag fade-in">What You Get</div>
+    <h2 class="section-title fade-in">SUBSCRIBER EARNINGS<br>& CHANNEL GROWTH</h2>
+    <div class="results-cards fade-in">
+      <div class="result-card">
+        <div class="result-icon">👁️</div>
+        <div class="result-val">+300%</div>
+        <div class="result-label">Average Viewer Increase</div>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">💬</div>
+        <div class="result-val">10x</div>
+        <div class="result-label">Chat Activity Growth</div>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">❤️</div>
+        <div class="result-val">+450</div>
+        <div class="result-label">Average New Followers</div>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">💰</div>
+        <div class="result-val">↑ Subs</div>
+        <div class="result-label">Subscriber Earnings Boosted</div>
+      </div>
+      <div class="result-card">
+        <div class="result-icon">🎯</div>
+        <div class="result-val">Real</div>
+        <div class="result-label">100% Organic Audience</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNERED STREAMERS -->
+<section id="streamers">
+  <div class="section-tag fade-in">Success Stories</div>
+  <h2 class="section-title fade-in">STREAMERS WE'VE<br>HELPED GET PARTNERED</h2>
+  <p class="section-desc fade-in">These channels grew with DreamLink and earned the Twitch Partner badge. Tap any card to visit their channel.</p>
+  <div class="streamers-grid fade-in">
+    <a href="https://www.twitch.tv/noahgrossmanlive" target="_blank" class="streamer-card">
+      <div class="streamer-avatar">NG</div>
+      <div class="streamer-name">NoahGrossmanLive</div>
+      <div class="streamer-badge">✦ Partnered</div>
+      <div class="streamer-link">↗ Visit Channel</div>
+    </a>
+    <a href="https://www.twitch.tv/perx1of1" target="_blank" class="streamer-card">
+      <div class="streamer-avatar">PX</div>
+      <div class="streamer-name">Perx1of1</div>
+      <div class="streamer-badge">✦ Partnered</div>
+      <div class="streamer-link">↗ Visit Channel</div>
+    </a>
+    <a href="https://www.twitch.tv/nightingtv" target="_blank" class="streamer-card">
+      <div class="streamer-avatar">NT</div>
+      <div class="streamer-name">NightingTV</div>
+      <div class="streamer-badge">✦ Partnered</div>
+      <div class="streamer-link">↗ Visit Channel</div>
+    </a>
+    <a href="https://www.twitch.tv/imroocks" target="_blank" class="streamer-card">
+      <div class="streamer-avatar">IR</div>
+      <div class="streamer-name">imroocks</div>
+      <div class="streamer-badge">✦ Partnered</div>
+      <div class="streamer-link">↗ Visit Channel</div>
+    </a>
+    <a href="https://www.twitch.tv/min1mise" target="_blank" class="streamer-card">
+      <div class="streamer-avatar">MM</div>
+      <div class="streamer-name">MIN1MISE</div>
+      <div class="streamer-badge">✦ Partnered</div>
+      <div class="streamer-link">↗ Visit Channel</div>
+    </a>
+    <a href="https://www.twitch.tv/mamadre69" target="_blank" class="streamer-card">
+      <div class="streamer-avatar">MD</div>
+      <div class="streamer-name">MamaDre69</div>
+      <div class="streamer-badge">✦ Partnered</div>
+      <div class="streamer-link">↗ Visit Channel</div>
+    </a>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" style="background: var(--bg2); max-width: 100%; padding: 100px 60px;">
+  <div style="max-width: 1280px; margin: 0 auto;">
+  <div class="section-tag fade-in">Pricing</div>
+  <h2 class="section-title fade-in">PICK YOUR<br>PACKAGE</h2>
+  <p class="section-desc fade-in">All packages deliver real, organic Twitch viewers and chat activity. Choose the tier that matches your growth goals.</p>
+  <div class="packages-grid fade-in">
+
+    <div class="pkg-card">
+      <div class="pkg-price"><sup>$</sup>75</div>
+      <div class="pkg-tier">Starter Package</div>
+      <ul class="pkg-features">
+        <li>Targeted viewer promotion</li>
+        <li>Real chat activity boost</li>
+        <li>Niche audience targeting</li>
+        <li>Follower growth</li>
+        <li>7-day campaign</li>
+      </ul>
+      <a href="https://www.upwork.com/services/product/marketing-organic-twitch-viewers-and-chatter-1876721301038490088?ref=project_share&tier=0" target="_blank" class="pkg-cta">Get Started →</a>
+    </div>
+
+    <div class="pkg-card featured">
+      <div class="pkg-featured-tag">Most Popular</div>
+      <div class="pkg-price"><sup>$</sup>150</div>
+      <div class="pkg-tier">Growth Package</div>
+      <ul class="pkg-features">
+        <li>Everything in Starter</li>
+        <li>Extended viewer retention</li>
+        <li>Higher traffic volume</li>
+        <li>Increased chat engagement</li>
+        <li>14-day campaign</li>
+        <li>Priority support</li>
+      </ul>
+      <a href="https://www.upwork.com/services/product/marketing-organic-twitch-viewers-and-chatter-1876721301038490088?ref=project_share&tier=0" target="_blank" class="pkg-cta">Get Started →</a>
+    </div>
+
+    <div class="pkg-card">
+      <div class="pkg-price"><sup>$</sup>300</div>
+      <div class="pkg-tier">Pro Package</div>
+      <ul class="pkg-features">
+        <li>Everything in Growth</li>
+        <li>Maximum viewer volume</li>
+        <li>Full campaign management</li>
+        <li>Returning viewer strategy</li>
+        <li>30-day campaign</li>
+        <li>Partnership pathway support</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a href="https://www.upwork.com/services/product/marketing-organic-twitch-viewers-and-chatter-1876721301038490088?ref=project_share&tier=0" target="_blank" class="pkg-cta">Get Started →</a>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" style="max-width: 100%; padding: 100px 60px;">
+  <div style="max-width: 1280px; margin: 0 auto;">
+  <div class="reviews-header">
+    <div>
+      <div class="section-tag">Client Reviews</div>
+      <h2 class="section-title">WHAT STREAMERS<br>ARE SAYING</h2>
+    </div>
+    <div class="reviews-score">
+      <div class="score-stars">⭐⭐⭐⭐⭐</div>
+      <div class="score-big">5.0</div>
+      <div class="score-count">Based on 30 verified reviews</div>
+    </div>
+  </div>
+  <div class="reviews-grid fade-in">
+
+    <div class="review-card">
+      <div class="review-num">Review #1</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I was honestly skeptical at first because I've tried promotions before that brought fake traffic, but this was completely different. He explained how the promotion works — targeting real Twitch viewers through niche audiences and external traffic sources — and I decided to give it a shot. Within a few days, I noticed actual people joining my stream, chatting, and even following. It didn't feel forced at all. If you're serious about growing your channel the right way, this is legit.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #2</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">What I liked most is that he didn't just "send views," he actually promoted my channel to people interested in my type of content. He broke down the process clearly before starting, which gave me confidence. After the campaign started, I saw a steady increase in viewers and chat activity. Definitely not bots — real engagement. Highly recommend.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #3</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">This service is different from the usual promoters. Instead of random spikes, I got consistent traffic over time. He explained that it's about pushing your stream through targeted promotion and improving visibility. I started seeing returning viewers, which is something I've never had before.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #4</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I've been streaming for months with barely any viewers, and this completely changed things. The way the promo works is actually smart — it brings in people who are already interested in your niche. My chat finally became active, and I even gained a few loyal viewers.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #5</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Very professional from start to finish. He explained everything clearly, including expectations and results. The promotion didn't feel fake at all — I saw real usernames, real chats, and even follows during the stream. Definitely worth it.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #6</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">What impressed me is the transparency. He told me exactly how the promotion works and what kind of results to expect. No overpromising. After starting, my average viewers increased and I started getting more interaction. Solid service.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #7</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I've worked with other promoters before, but this one actually focuses on real growth. He promotes your stream in a way that attracts genuine viewers instead of empty numbers. My engagement went up, not just my views.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #8</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">The best part is how natural everything felt. The viewers didn't just join and leave — they stayed, chatted, and even came back the next stream. That shows the promotion is reaching the right audience.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #9</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">He explained that Twitch growth is about visibility and consistency, and this service helps with both. After using it, I noticed my stream getting more exposure and traction. Definitely helped me break out of being stuck at 0–2 viewers.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #10</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">This is not one of those "instant fake growth" services. It's more strategic. He promotes your content in a way that builds real engagement. I saw a steady increase in followers and viewers over time.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #11</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I liked how he answered all my questions before I even bought. He explained how the promo works and reassured me about quality. After trying it, I can confirm it's legit.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #12</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">My stream finally feels alive. Before this, I would stream to almost nobody. Now I actually have people chatting and interacting. The promotion clearly targets real users.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #13</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">He doesn't just promote — he understands Twitch growth. The traffic I received was relevant to my content, which made a big difference.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #14</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">The results weren't just numbers. I got real engagement, follows, and even returning viewers. That's what every streamer wants.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #15</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Very smooth experience. Communication was clear, and the results matched what he explained beforehand.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #16</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I appreciate the honesty. He didn't promise unrealistic results, but still delivered strong growth.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #17</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Helped me build momentum on my channel. I finally feel like my streams are getting noticed.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #18</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">The promotion actually works in bringing the right audience. That's what makes it effective.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #19</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I noticed improvement not just in viewers, but also in chat activity and retention.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #20</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">This service helped me take my channel seriously. It gave me the push I needed.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #21</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">If you're stuck with low viewers, this is a great way to get exposure.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #22</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I saw results faster than expected, but it still felt natural and organic.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #23</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">He clearly knows what he's doing when it comes to Twitch promotion.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #24</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Great investment if you're trying to grow your stream.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #25</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">The viewers I got actually stayed and interacted, which is rare.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #26</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">This helped me gain confidence while streaming because I finally had an audience.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #27</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Very reliable service. Delivered exactly what was explained.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #28</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Perfect for new streamers trying to build an audience.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #29</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">I liked that the growth didn't feel artificial — it felt earned.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+    <div class="review-card">
+      <div class="review-num">Review #30</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Overall, a solid promotion service that focuses on real results and real viewers.</p>
+      <div class="review-author">Verified Twitch Streamer</div>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<!-- SPONSORSHIP -->
+<div class="sponsor-section" id="sponsorship">
+  <div class="sponsor-inner">
+    <div class="section-tag fade-in">For Streamers</div>
+    <h2 class="section-title fade-in">SPONSORSHIP<br>OPPORTUNITIES</h2>
+    <p class="section-desc fade-in">When you work with DreamLink Agency, it's not just promotion — it opens doors to brand partnerships and sponsorship deals as your channel grows.</p>
+    <div class="sponsor-perks fade-in">
+      <div class="perk-card">
+        <div class="perk-icon">🎮</div>
+        <div class="perk-title">Gaming Brand Deals</div>
+        <div class="perk-desc">As your audience grows with our promotion, gaming brands and peripherals companies reach out for sponsored streams and endorsements.</div>
+      </div>
+      <div class="perk-card">
+        <div class="perk-icon">🧢</div>
+        <div class="perk-title">Merch & Apparel Partners</div>
+        <div class="perk-desc">Channels with real, engaged audiences attract clothing and merch brands looking for authentic Twitch partnerships.</div>
+      </div>
+      <div class="perk-card">
+        <div class="perk-icon">📦</div>
+        <div class="perk-title">Product Sponsorships</div>
+        <div class="perk-desc">Energy drinks, gaming chairs, headsets, and more — brands actively scout for mid-tier streamers with genuine communities.</div>
+      </div>
+      <div class="perk-card">
+        <div class="perk-icon">💎</div>
+        <div class="perk-title">Agency Network Access</div>
+        <div class="perk-desc">As a DreamLink partner, you get access to our sponsorship network — connecting you directly with brands seeking Twitch creators.</div>
+      </div>
+      <div class="perk-card">
+        <div class="perk-icon">📈</div>
+        <div class="perk-title">Twitch Partner Pathway</div>
+        <div class="perk-desc">Our promotion strategy is designed to hit Twitch Partner requirements — average concurrent viewers, streaming days, and broadcast hours.</div>
+      </div>
+      <div class="perk-card">
+        <div class="perk-icon">🤝</div>
+        <div class="perk-title">Collab Opportunities</div>
+        <div class="perk-desc">Be introduced to other DreamLink streamers for co-streams, raids, and network growth that multiplies your audience.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DONATION -->
+<div class="donation-section" id="donate">
+  <div class="donation-inner">
+    <div class="section-tag">Support The Agency</div>
+    <h2 class="section-title">LOVE WHAT<br>WE DO?</h2>
+    <div class="donation-card fade-in">
+      <p>If DreamLink Agency helped you grow your channel and you want to show some love, a donation goes directly toward improving our promotion tools and helping more streamers reach their goals.</p>
+      <a href="https://www.upwork.com/services/product/marketing-organic-twitch-viewers-and-chatter-1876721301038490088?ref=project_share&tier=0" target="_blank" class="btn-primary">Support DreamLink ❤️</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Dream<span>Link</span></div>
+  <div class="footer-text">© 2025 DreamLink Agency · Real Twitch Growth · 53+ Streamers Served</div>
+  <div class="footer-links">
+    <a href="https://www.upwork.com/services/product/marketing-organic-twitch-viewers-and-chatter-1876721301038490088?ref=project_share&tier=0" target="_blank">Upwork</a>
+    <a href="#packages">Packages</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#how-it-works">How It Works</a>
+  </div>
+</footer>
+
+<script>
+  // Intersection Observer for fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
